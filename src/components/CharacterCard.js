@@ -9,7 +9,7 @@ const Card = styled.div`
 `
 
 export default function CharacterCard({ char }) {
-  const { name, status, species, gender, origin, image  } = char
+  const { name, status, image } = char
   return (
     <Card>
       <img src={image} />

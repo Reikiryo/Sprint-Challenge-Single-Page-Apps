@@ -10,17 +10,17 @@ export default function SearchForm({ data, handleSearch }) {
   const handleSubmit = e => {
     e.preventDefault()
     const newChars = data.filter(char => (
-        char.name.toLowerCase().includes(search.toLowerCase())
+      char.name.toLowerCase().includes(search.toLowerCase())
     ))
     handleSearch(newChars)
-  }  
+  }
   return (
     <section className="search-form">
       <label>
-      Search
+        Search
         <form onSubmit={handleSubmit}>
           <input onChange={handleChanges} value={search} type="text" placeholder="Rick Sanchez 🔍" />
-          <input type="submit"/>
+          <input type="submit" />
         </form>
       </label>
     </section>

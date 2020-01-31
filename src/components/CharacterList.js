@@ -15,12 +15,14 @@ const CharContainer = styled.div`
 
 export default function CharacterList() {
   const [data, setData] = useState([])
+  const [searchData, setSearchData] = useState([])
 
   useEffect(() => {
     axios.get(`https://rickandmortyapi.com/api/character/`)
       .then(res => {
-        console.log(res)
+        //console.log(res)
         setData(res.data.results)
+        setSearchData(res.data.results)
       })
       .catch(err => {
         console.log("ERROR", err)
@@ -29,7 +31,7 @@ export default function CharacterList() {
   }, []);
 
   const handleSearch = arr => {
-      setData(arr)
+    setSearchData(arr)
   }
 
   return (
@@ -37,7 +39,7 @@ export default function CharacterList() {
       <SearchForm handleSearch={handleSearch} data={data} />
       <h1>Characters</h1>
       <CharContainer>
-        {data.map(char => (
+        {searchData.map(char => (
           <CharacterCard key={char.id} char={char} />
         ))}
       </CharContainer>
