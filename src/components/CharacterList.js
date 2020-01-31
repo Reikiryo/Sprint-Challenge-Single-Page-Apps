@@ -12,27 +12,50 @@ const CharContainer = styled.div`
   flex-wrap: wrap;
   justify-content: center;
 `
+const Loading = styled.h1`
+  text-align: center;
+`
 
 export default function CharacterList() {
+  const [load, setLoad] = useState()
   const [data, setData] = useState([])
   const [searchData, setSearchData] = useState([])
-
-  useEffect(() => {
-    axios.get(`https://rickandmortyapi.com/api/character/`)
-      .then(res => {
-        //console.log(res)
-        setData(res.data.results)
-        setSearchData(res.data.results)
-      })
-      .catch(err => {
-        console.log("ERROR", err)
-      })
-
-  }, []);
+  const api = 'https://rickandmortyapi.com/api/character/'
+  let nextApi = ''
+  const arr = []
 
   const handleSearch = arr => {
     setSearchData(arr)
   }
+
+  const callApi = a => {
+    axios.get(a)
+      .then(res => {
+        //console.log(res)
+        res.data.results.forEach(x => {
+          arr.push(x)
+        })
+        setData(arr)
+        if (res.data.info.next !== '') {
+          nextApi = res.data.info.next
+          callApi(nextApi)
+        }
+      })
+      .catch(err => {
+        console.log("ERROR", err)
+      })
+  }
+
+  useEffect(() => {
+    callApi(api)
+  }, []);
+
+  //setTimeout(function(){handleSearch(data); }, 2000);
+
+  useEffect(() => {
+    setTimeout(function(){setLoad(1)
+       handleSearch(data); }, 2000);
+  }, [load]);
 
   return (
     <section className="character-list">
@@ -43,6 +66,7 @@ export default function CharacterList() {
           <CharacterCard key={char.id} char={char} />
         ))}
       </CharContainer>
+      <Loading>Loading...</Loading>
     </section>
   );
 }
