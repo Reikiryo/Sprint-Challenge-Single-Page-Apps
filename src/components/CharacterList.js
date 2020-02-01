@@ -19,8 +19,8 @@ const Title = styled.h1`
   text-align: center;
 `
 
-export default function CharacterList() {
-  const [load, setLoad] = useState()
+function CharacterList() {
+  const [load, setLoad] = useState('visible')
   const [data, setData] = useState([])
   const [searchData, setSearchData] = useState([])
   const api = 'https://rickandmortyapi.com/api/character/'
@@ -55,8 +55,10 @@ export default function CharacterList() {
 
   useEffect(() => {
     setTimeout(function () {
-      setLoad(0)
-    }, 500);
+      setLoad('invisible')
+      const loadFinish = document.querySelector('.invisible')
+      loadFinish.style.display = 'none'
+    }, 1000);
     handleSearch(data);
   }, [load]);
 
@@ -69,7 +71,9 @@ export default function CharacterList() {
           <CharacterCard key={char.id} char={char} />
         ))}
       </CharContainer>
-      <Loading>Loading...</Loading>
+      <Loading className={load}>Loading...</Loading>
     </section>
   );
 }
+
+export default CharacterList
