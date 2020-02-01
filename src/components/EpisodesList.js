@@ -1,16 +1,11 @@
 import React, { useEffect, useState } from "react";
 import axios from 'axios'
+import EpisodeCard from './EpisodeCard'
 import styled from 'styled-components'
-import CharacterCard from './CharacterCard'
 import SearchForm from './SearchForm'
 
-const CharContainer = styled.div`
-  with: 70%
-  margin: 1% auto;
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  justify-content: center;
+const EpisodeDiv = styled.div`
+    text-align: center;
 `
 const Loading = styled.h1`
   text-align: center;
@@ -19,16 +14,16 @@ const Title = styled.h1`
   text-align: center;
 `
 
-export default function CharacterList() {
+export default function LocationsList() {
   const [load, setLoad] = useState()
   const [data, setData] = useState([])
   const [searchData, setSearchData] = useState([])
-  const api = 'https://rickandmortyapi.com/api/character/'
+  const api = 'https://rickandmortyapi.com/api/episode/'
   let nextApi = ''
   const arr = []
 
-  const handleSearch = arr => {
-    setSearchData(arr)
+  const handleSearch = ar => {
+    setSearchData(ar)
   }
 
   const callApi = a => {
@@ -55,20 +50,20 @@ export default function CharacterList() {
 
   useEffect(() => {
     setTimeout(function () {
-      setLoad(0)
+      setLoad(1)
     }, 500);
     handleSearch(data);
   }, [load]);
 
   return (
-    <section className="character-list">
+    <section>
       <SearchForm handleSearch={handleSearch} data={data} />
-      <Title>Characters</Title>
-      <CharContainer>
-        {searchData.map(char => (
-          <CharacterCard key={char.id} char={char} />
+      <Title>Episodes</Title>
+      <EpisodeDiv>
+        {searchData.map(episode => (
+          <EpisodeCard key={episode.id} epi={episode} />
         ))}
-      </CharContainer>
+      </EpisodeDiv>
       <Loading>Loading...</Loading>
     </section>
   );
