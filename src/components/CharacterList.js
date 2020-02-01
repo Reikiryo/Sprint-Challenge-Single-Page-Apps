@@ -58,7 +58,7 @@ function CharacterList() {
       setLoad('invisible')
       const loadFinish = document.querySelector('.invisible')
       loadFinish.style.display = 'none'
-    }, 500);
+    }, 1000);
     handleSearch(data);
   }, [load]);
 
