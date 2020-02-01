@@ -15,7 +15,7 @@ const Title = styled.h1`
 `
 
 export default function LocationsList() {
-  const [load, setLoad] = useState()
+  const [load, setLoad] = useState('visible')
   const [data, setData] = useState([])
   const [searchData, setSearchData] = useState([])
   const api = 'https://rickandmortyapi.com/api/episode/'
@@ -50,7 +50,9 @@ export default function LocationsList() {
 
   useEffect(() => {
     setTimeout(function () {
-      setLoad(1)
+      setLoad('invisible')
+      const loadFinish = document.querySelector('.invisible')
+      loadFinish.style.display = 'none'
     }, 500);
     handleSearch(data);
   }, [load]);
@@ -64,7 +66,7 @@ export default function LocationsList() {
           <EpisodeCard key={episode.id} epi={episode} />
         ))}
       </EpisodeDiv>
-      <Loading>Loading...</Loading>
+      <Loading className={load} >Loading...</Loading>
     </section>
   );
 }

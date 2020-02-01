@@ -14,7 +14,7 @@ const Title = styled.h1`
   text-align: center;
 `
 export default function LocationsList() {
-    const [load, setLoad] = useState()
+    const [load, setLoad] = useState('visible')
     const [data, setData] = useState([])
     const [searchData, setSearchData] = useState([])
     const api = 'https://rickandmortyapi.com/api/location/'
@@ -49,10 +49,12 @@ export default function LocationsList() {
 
     useEffect(() => {
         setTimeout(function () {
-            setLoad(1)
+          setLoad('invisible')
+          const loadFinish = document.querySelector('.invisible')
+          loadFinish.style.display = 'none'
         }, 500);
         handleSearch(data);
-    }, [load]);
+      }, [load]);
 
     return (
         <section>
@@ -63,7 +65,7 @@ export default function LocationsList() {
                     <LocationCard key={location.id} location={location} />
                 ))}
             </LocationDiv>
-            <Loading>Loading...</Loading>
+            <Loading className={load} >Loading...</Loading>
         </section>
     );
 }
