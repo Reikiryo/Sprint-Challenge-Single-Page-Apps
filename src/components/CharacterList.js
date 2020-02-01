@@ -15,6 +15,9 @@ const CharContainer = styled.div`
 const Loading = styled.h1`
   text-align: center;
 `
+const Title = styled.h1`
+  text-align: center;
+`
 
 export default function CharacterList() {
   const [load, setLoad] = useState()
@@ -50,17 +53,17 @@ export default function CharacterList() {
     callApi(api)
   }, []);
 
-  //setTimeout(function(){handleSearch(data); }, 2000);
-
   useEffect(() => {
-    setTimeout(function(){setLoad(1)
-       handleSearch(data); }, 2000);
+    setTimeout(function () {
+      setLoad(0)
+    }, 1000);
+    handleSearch(data);
   }, [load]);
 
   return (
     <section className="character-list">
       <SearchForm handleSearch={handleSearch} data={data} />
-      <h1>Characters</h1>
+      <Title>Characters</Title>
       <CharContainer>
         {searchData.map(char => (
           <CharacterCard key={char.id} char={char} />

@@ -1,4 +1,11 @@
 import React, { useState } from "react";
+import styled from 'styled-components'
+
+const FormDiv = styled.div`
+  text-align: center;
+  width: 30%;
+  margin: 0 auto; 
+`
 
 export default function SearchForm({ data, handleSearch }) {
   const [search, setSearch] = useState('')
@@ -16,13 +23,15 @@ export default function SearchForm({ data, handleSearch }) {
   }
   return (
     <section className="search-form">
-      <label>
-        Search
-        <form onSubmit={handleSubmit}>
-          <input onChange={handleChanges} value={search} type="text" placeholder="Search Here 🔍" />
-          <input type="submit" />
-        </form>
-      </label>
+      <FormDiv>
+        <label>
+          Search
+          <form onSubmit={handleSubmit}>
+            <input onChange={handleChanges} value={search} type="text" placeholder="Search Here 🔍" />
+            <input type="submit" />
+          </form>
+        </label>
+      </FormDiv>
     </section>
   );
 }

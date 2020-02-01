@@ -10,7 +10,11 @@ const LocationDiv = styled.div`
 const Loading = styled.h1`
   text-align: center;
 `
+const Title = styled.h1`
+  text-align: center;
+`
 export default function LocationsList() {
+    const [load, setLoad] = useState()
     const [data, setData] = useState([])
     const [searchData, setSearchData] = useState([])
     const api = 'https://rickandmortyapi.com/api/location/'
@@ -43,11 +47,17 @@ export default function LocationsList() {
         callApi(api)
     }, []);
 
-    setTimeout(function () { handleSearch(data); }, 2000);
+    useEffect(() => {
+        setTimeout(function () {
+            setLoad(1)
+        }, 2000);
+        handleSearch(data);
+    }, [load]);
 
     return (
         <section>
             <SearchForm handleSearch={handleSearch} data={data} />
+            <Title>Locations</Title>
             <LocationDiv>
                 {searchData.map(location => (
                     <LocationCard key={location.id} location={location} />
