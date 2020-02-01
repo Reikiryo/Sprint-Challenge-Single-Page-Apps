@@ -25,6 +25,7 @@ function CharacterList() {
   const [searchData, setSearchData] = useState([])
   const api = 'https://rickandmortyapi.com/api/character/'
   let nextApi = ''
+  let timeOut = 2500
   const arr = []
 
   const handleSearch = arr => {
@@ -58,7 +59,7 @@ function CharacterList() {
       setLoad('invisible')
       const loadFinish = document.querySelector('.invisible')
       loadFinish.style.display = 'none'
-    }, 1000);
+    }, timeOut);
     handleSearch(data);
   }, [load]);
 
