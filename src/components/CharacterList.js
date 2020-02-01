@@ -56,7 +56,7 @@ export default function CharacterList() {
   useEffect(() => {
     setTimeout(function () {
       setLoad(0)
-    }, 1000);
+    }, 500);
     handleSearch(data);
   }, [load]);
 

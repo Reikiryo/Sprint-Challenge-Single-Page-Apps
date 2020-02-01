@@ -51,7 +51,7 @@ export default function LocationsList() {
   useEffect(() => {
     setTimeout(function () {
       setLoad(1)
-    }, 2000);
+    }, 500);
     handleSearch(data);
   }, [load]);
 
