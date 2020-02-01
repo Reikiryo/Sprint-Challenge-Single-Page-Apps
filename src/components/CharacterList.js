@@ -28,8 +28,8 @@ function CharacterList() {
   let timeOut = 2500
   const arr = []
 
-  const handleSearch = arr => {
-    setSearchData(arr)
+  const handleSearch = Arr => {
+    setSearchData(Arr)
   }
 
   const callApi = a => {
@@ -40,6 +40,7 @@ function CharacterList() {
           arr.push(x)
         })
         setData(arr)
+        setTimeout(1000)
         if (res.data.info.next !== '') {
           nextApi = res.data.info.next
           callApi(nextApi)
