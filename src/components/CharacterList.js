@@ -25,7 +25,7 @@ function CharacterList() {
   const [searchData, setSearchData] = useState([])
   const api = 'https://rickandmortyapi.com/api/character/'
   let nextApi = ''
-  let timeOut = 1000
+  let timeOut = 2500
   const arr = []
 
   const handleSearch = arr => {
@@ -44,7 +44,6 @@ function CharacterList() {
           nextApi = res.data.info.next
           callApi(nextApi)
         }
-        timeOut = 2200
       })
       .catch(err => {
         console.log("ERROR", err)
