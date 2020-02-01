@@ -40,7 +40,7 @@ function CharacterList() {
           arr.push(x)
         })
         setData(arr)
-        setTimeout(1000)
+        timeOut = 1000
         if (res.data.info.next !== '') {
           nextApi = res.data.info.next
           callApi(nextApi)
